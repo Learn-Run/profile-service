@@ -1,0 +1,4 @@
+spring:
+  date:
+    mongodb:
+      uri: ${MONGODB_URI_PROFILE}

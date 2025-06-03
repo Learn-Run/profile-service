@@ -1,14 +1,4 @@
 spring:
   date:
     mongodb:
-      uri: mongodb://localhost:27017/pl_profile_v1
-
-cloud:
-  aws:
-    credentials:
-      access-key: ${DEV_AWS_ACCESS_KEY}
-      secret-key: ${DEV_AWS_SECRET_KEY}
-    region:
-      static: ap-northeast-2
-    s3:
-      bucket: ${AWS_S3_BUCKET}
+      uri: mongodb://localhost:27017/pl-profile-v1

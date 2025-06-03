@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ResponseMessage {
 
-    SUCCESS_CREATE_PROFILE("프로필 생성에 성공하였습니다."),
+    SUCCESS_REGISTER_NICKNAME("닉네임 등록에 성공하였습니다."),
+    SUCCESS_CHECK_NICKNAME_DUPLICATE("닉네임 중복 검사에 성공하였습니다."),
+    SUCCESS_CHANGE_NICKNAME("닉네임 변경에 성공하였습니다."),
     ;
 
     private final String message;

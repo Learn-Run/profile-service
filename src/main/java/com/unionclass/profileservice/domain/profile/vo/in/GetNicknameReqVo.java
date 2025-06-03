@@ -1,4 +1,4 @@
-package com.unionclass.profileservice.profile.vo.in;
+package com.unionclass.profileservice.domain.profile.vo.in;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

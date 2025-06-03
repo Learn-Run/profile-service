@@ -1,4 +1,4 @@
-package com.unionclass.profileservice.profile.entity;
+package com.unionclass.profileservice.domain.profile.entity;
 
 import com.unionclass.profileservice.common.entity.BaseDocument;
 import lombok.Builder;

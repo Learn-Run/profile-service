@@ -1,14 +1,14 @@
-package com.unionclass.profileservice.profile.presentation;
+package com.unionclass.profileservice.domain.profile.presentation;
 
 import com.unionclass.profileservice.common.response.BaseResponseEntity;
 import com.unionclass.profileservice.common.response.ResponseMessage;
-import com.unionclass.profileservice.profile.application.ProfileService;
-import com.unionclass.profileservice.profile.dto.in.ChangeNicknameReqDto;
-import com.unionclass.profileservice.profile.dto.in.GetNicknameReqDto;
-import com.unionclass.profileservice.profile.dto.in.RegisterNicknameReqDto;
-import com.unionclass.profileservice.profile.vo.in.ChangeNicknameReqVo;
-import com.unionclass.profileservice.profile.vo.in.GetNicknameReqVo;
-import com.unionclass.profileservice.profile.vo.in.RegisterNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.application.ProfileService;
+import com.unionclass.profileservice.domain.profile.dto.in.ChangeNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.in.GetNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.vo.in.ChangeNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.vo.in.GetNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.vo.in.RegisterNicknameReqVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

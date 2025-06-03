@@ -1,7 +1,7 @@
-package com.unionclass.profileservice.profile.dto.in;
+package com.unionclass.profileservice.domain.profile.dto.in;
 
-import com.unionclass.profileservice.profile.entity.Profile;
-import com.unionclass.profileservice.profile.vo.in.RegisterNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.vo.in.RegisterNicknameReqVo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

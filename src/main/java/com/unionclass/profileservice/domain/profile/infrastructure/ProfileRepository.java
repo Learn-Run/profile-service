@@ -1,6 +1,6 @@
-package com.unionclass.profileservice.profile.infrastructure;
+package com.unionclass.profileservice.domain.profile.infrastructure;
 
-import com.unionclass.profileservice.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.entity.Profile;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

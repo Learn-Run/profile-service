@@ -1,12 +1,12 @@
-package com.unionclass.profileservice.profile.application;
+package com.unionclass.profileservice.domain.profile.application;
 
 import com.unionclass.profileservice.common.exception.BaseException;
 import com.unionclass.profileservice.common.exception.ErrorCode;
-import com.unionclass.profileservice.profile.dto.in.ChangeNicknameReqDto;
-import com.unionclass.profileservice.profile.dto.in.GetNicknameReqDto;
-import com.unionclass.profileservice.profile.dto.in.RegisterNicknameReqDto;
-import com.unionclass.profileservice.profile.entity.Profile;
-import com.unionclass.profileservice.profile.infrastructure.ProfileRepository;
+import com.unionclass.profileservice.domain.profile.dto.in.ChangeNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.in.GetNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.infrastructure.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

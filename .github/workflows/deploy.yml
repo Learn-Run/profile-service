@@ -46,21 +46,21 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker Image
-        run: docker build -t member-service:latest .
+        run: docker build -t profile-service:latest .
 
       - name: Tag Docker Image
-        run: docker tag member-service:latest ${{ steps.login-ecr.outputs.registry }}/learn-run/member-service:latest
+        run: docker tag profile-service:latest ${{ steps.login-ecr.outputs.registry }}/learn-run/profile-service:latest
 
       - name: Push Docker Image to ECR
-        run: docker push ${{ steps.login-ecr.outputs.registry }}/learn-run/member-service:latest
+        run: docker push ${{ steps.login-ecr.outputs.registry }}/learn-run/profile-service:latest
 
-      - name: Copy docker-compose-member.yml to EC2
+      - name: Copy docker-compose-profile.yml to EC2
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          source: "docker-compose-member.yml"
+          source: "docker-compose-profile.yml"
           target: "~/"
 
       - name: Deploy on EC2 via SSH
@@ -71,7 +71,7 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
           script: |
-            docker pull ${{ steps.login-ecr.outputs.registry }}/learn-run/member-service:latest
-            docker-compose -f docker-compose-member.yml down
-            docker-compose -f docker-compose-member.yml up -d
+            docker pull ${{ steps.login-ecr.outputs.registry }}/learn-run/profile-service:latest
+            docker-compose -f docker-compose-profile.yml down
+            docker-compose -f docker-compose-profile.yml up -d
             docker image prune -f

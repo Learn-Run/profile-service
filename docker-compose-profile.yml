@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  profile-service:
+    image: 009160040466.dkr.ecr.ap-northeast-2.amazonaws.com/learn-run/profile-service:latest
+    container_name: profile-service
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    external: true

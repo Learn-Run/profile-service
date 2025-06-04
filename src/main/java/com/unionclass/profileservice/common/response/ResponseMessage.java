@@ -12,7 +12,7 @@ public enum ResponseMessage {
     SUCCESS_CHANGE_NICKNAME("닉네임 변경에 성공하였습니다."),
     SUCCESS_GET_AUTHOR_INFORMATION("작성자 프로필 조회에 성공하였습니다."),
     SUCCESS_CREATE_PROFILE("프로필 생성에 성공하였습니다."),
-    ;
+    SUCCESS_UPDATE_PROFILE("프로필 변경에 성공하였습니다.");
 
     private final String message;
 }

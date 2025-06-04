@@ -3,14 +3,8 @@ package com.unionclass.profileservice.domain.profile.presentation;
 import com.unionclass.profileservice.common.response.BaseResponseEntity;
 import com.unionclass.profileservice.common.response.ResponseMessage;
 import com.unionclass.profileservice.domain.profile.application.ProfileService;
-import com.unionclass.profileservice.domain.profile.dto.in.ChangeNicknameReqDto;
-import com.unionclass.profileservice.domain.profile.dto.in.CreateProfileReqDto;
-import com.unionclass.profileservice.domain.profile.dto.in.GetNicknameReqDto;
-import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDto;
-import com.unionclass.profileservice.domain.profile.vo.in.ChangeNicknameReqVo;
-import com.unionclass.profileservice.domain.profile.vo.in.CreateProfileReqVo;
-import com.unionclass.profileservice.domain.profile.vo.in.GetNicknameReqVo;
-import com.unionclass.profileservice.domain.profile.vo.in.RegisterNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.dto.in.*;
+import com.unionclass.profileservice.domain.profile.vo.in.*;
 import com.unionclass.profileservice.domain.profile.vo.out.GetAuthorInfoVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -198,7 +192,7 @@ public class ProfileController {
 
                     [예외 상황]
                     - NO_EXIST_MEMBER : 해당 UUID 를 가진 회원 정보가 존재하지 않음
-                    - FAILED_TO_CREATE_PROFILE : 프로필 저장 중 내부 서버 오류
+                    - FAILED_TO_CREATE_PROFILE : 프로필 생성 중 내부 서버 오류
                     """
     )
     @PostMapping
@@ -208,5 +202,44 @@ public class ProfileController {
     ) {
         profileService.createProfile(CreateProfileReqDto.of(memberUuid, createProfileReqVo));
         return new BaseResponseEntity<>(ResponseMessage.SUCCESS_CREATE_PROFILE.getMessage());
+    }
+
+    /**
+     * 6. 프로필 변경
+     *
+     * @param memberUuid
+     * @param updateProfileReqVo
+     */
+    @Operation(
+            summary = "프로필 변경",
+            description = """
+                    사용자의 프로필 정보를 변경하는 API 입니다.
+            
+                    [요청 헤더]
+                    - X-Member-UUID : (String) 회원의 고유 식별자
+            
+                    [요청 바디]
+                    - nickname : (String, optional) 닉네임
+                    - selfIntroduction : (String, optional) 자기소개
+                    - imageUrl : (String, optional) 프로필 이미지 URL
+                    - alt : (String, optional) 이미지 대체 텍스트 (접근성 대응)
+                    - categoryListIds : (List<Long>, optional) 관심 카테고리 ID 목록
+            
+                    [처리 로직]
+                    - memberUuid 로 기존 프로필을 조회
+                    - 전달받은 값만 반영하여 기존 값과 병합 후 저장
+            
+                    [예외 상황]
+                    - NO_EXIST_MEMBER : 해당하는 회원의 프로필이 존재하지 않을 경우
+                    - FAILED_TO_UPDATE_PROFILE : 프로필 변경 중 내부 서버 오류
+                    """
+    )
+    @PutMapping
+    public BaseResponseEntity<Void> updateProfile(
+            @RequestHeader("X-Member-UUID") String memberUuid,
+            @Valid @RequestBody UpdateProfileReqVo updateProfileReqVo
+    ) {
+        profileService.updateProfile(UpdateProfileReqDto.of(memberUuid, updateProfileReqVo));
+        return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE.getMessage());
     }
 }

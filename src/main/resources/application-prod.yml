@@ -2,3 +2,8 @@ spring:
   date:
     mongodb:
       uri: ${MONGODB_URI_PROFILE}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://profile-service:8761/eureka

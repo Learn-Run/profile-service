@@ -1,11 +1,14 @@
 package com.unionclass.profileservice.domain.profile.entity;
 
 import com.unionclass.profileservice.common.entity.BaseDocument;
+import com.unionclass.profileservice.domain.profile.dto.in.CreateProfileReqDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "profile")
 @Getter
@@ -22,11 +25,11 @@ public class Profile extends BaseDocument {
     private String imageUrl;
     private String alt;
 
-    private Long categoryListId;
+    private List<Long> categoryListIds;
 
     @Builder
     public Profile(String id, String memberUuid, String nickname, String selfIntroduction,
-                   String imageUrl, String alt, Long categoryListId
+                   String imageUrl, String alt, List<Long> categoryListIds
     ) {
         this.id = id;
         this.memberUuid = memberUuid;
@@ -34,7 +37,7 @@ public class Profile extends BaseDocument {
         this.selfIntroduction = selfIntroduction;
         this.imageUrl = imageUrl;
         this.alt = alt;
-        this.categoryListId = categoryListId;
+        this.categoryListIds = categoryListIds;
     }
 
     public void changeNickname(String nickname) {

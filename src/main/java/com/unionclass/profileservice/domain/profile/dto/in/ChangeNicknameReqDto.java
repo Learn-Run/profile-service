@@ -1,6 +1,8 @@
 package com.unionclass.profileservice.domain.profile.dto.in;
 
 import com.unionclass.profileservice.domain.profile.vo.in.ChangeNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.vo.in.CreateProfileReqVo;
+import jakarta.validation.Valid;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -67,9 +67,8 @@ public enum ErrorCode {
     CANNOT_UPDATE_REQUIRED_AGREEMENT(HttpStatus.BAD_REQUEST, false, 1122, "필수 동의 항목은 동의 상태를 변경할 수 없습니다."),
 
     // profile : 1200 ~ 1299
-    FAILED_TO_REGISTER_NICKNAME(HttpStatus.INTERNAL_SERVER_ERROR, false, 1200, "닉네임 등록에 실패하였습니다.")
-
-
+    FAILED_TO_REGISTER_NICKNAME(HttpStatus.INTERNAL_SERVER_ERROR, false, 1200, "닉네임 등록에 실패하였습니다."),
+    FAILED_TO_CREATE_PROFILE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1201, "프로필 생성에 실패하였습니다."),
     ;
 
     /**

@@ -1,6 +1,7 @@
 package com.unionclass.profileservice.domain.profile.application;
 
 import com.unionclass.profileservice.domain.profile.dto.in.ChangeNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.in.CreateProfileReqDto;
 import com.unionclass.profileservice.domain.profile.dto.in.GetNicknameReqDto;
 import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDto;
 import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
@@ -12,4 +13,5 @@ public interface ProfileService {
     void checkNicknameDuplicate(GetNicknameReqDto getNicknameReqDto);
     void changeNickname(ChangeNicknameReqDto changeNicknameReqDto);
     GetAuthorInfoDto getAuthorInfo(String memberUuid);
+    void createProfile(CreateProfileReqDto createProfileReqDto);
 }

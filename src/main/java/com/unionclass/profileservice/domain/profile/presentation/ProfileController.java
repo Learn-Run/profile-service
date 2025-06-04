@@ -4,9 +4,11 @@ import com.unionclass.profileservice.common.response.BaseResponseEntity;
 import com.unionclass.profileservice.common.response.ResponseMessage;
 import com.unionclass.profileservice.domain.profile.application.ProfileService;
 import com.unionclass.profileservice.domain.profile.dto.in.ChangeNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.in.CreateProfileReqDto;
 import com.unionclass.profileservice.domain.profile.dto.in.GetNicknameReqDto;
 import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDto;
 import com.unionclass.profileservice.domain.profile.vo.in.ChangeNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.vo.in.CreateProfileReqVo;
 import com.unionclass.profileservice.domain.profile.vo.in.GetNicknameReqVo;
 import com.unionclass.profileservice.domain.profile.vo.in.RegisterNicknameReqVo;
 import com.unionclass.profileservice.domain.profile.vo.out.GetAuthorInfoVo;
@@ -30,6 +32,8 @@ public class ProfileController {
      * 1. (회원가입 시) 닉네임 등록
      * 2. 닉네임 중복 검사
      * 3. 닉네임 변경
+     * 4. 작성자 프로필 조회
+     * 5. 프로필 생성
      */
 
     /**
@@ -93,7 +97,7 @@ public class ProfileController {
     }
 
     /**
-     * 2. 닉네임 변경
+     * 3. 닉네임 변경
      *
      * @param memberUuid
      * @param changeNicknameReqVo
@@ -130,6 +134,12 @@ public class ProfileController {
         return new BaseResponseEntity<>(ResponseMessage.SUCCESS_CHANGE_NICKNAME.getMessage());
     }
 
+    /**
+     * 4. 작성자 프로필 조회
+     *
+     * @param memberUuid
+     * @return
+     */
     @Operation(
             summary = "작성자 프로필 조회",
             description = """
@@ -159,5 +169,44 @@ public class ProfileController {
         return new BaseResponseEntity<>(
                 ResponseMessage.SUCCESS_GET_AUTHOR_INFORMATION.getMessage(),
                 profileService.getAuthorInfo(memberUuid).toVo());
+    }
+
+    /**
+     * 5. 프로필 생성
+     *
+     * @param memberUuid
+     * @param createProfileReqVo
+     * @return
+     */
+    @Operation(
+            summary = "프로필 생성",
+            description = """
+                    회원의 프로필 상세 정보를 등록해서 프로필을 생성하는 API 입니다.
+
+                    [요청 헤더]
+                    - X-Member-UUID : (String) 회원의 고유 식별자
+
+                    [요청 바디]
+                    - selfIntroduction : (String) 자기소개
+                    - imageUrl : (String) 프로필 이미지 URL
+                    - alt : (String) 이미지 대체 텍스트
+                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
+
+                    [처리 로직]
+                    - 상세 정보를 추가하여 프로필을 생성합니다.
+                    - MongoDB `profile` 컬렉션에 저장됩니다.
+
+                    [예외 상황]
+                    - NO_EXIST_MEMBER : 해당 UUID 를 가진 회원 정보가 존재하지 않음
+                    - FAILED_TO_CREATE_PROFILE : 프로필 저장 중 내부 서버 오류
+                    """
+    )
+    @PostMapping
+    public BaseResponseEntity<Void> createProfile(
+            @RequestHeader("X-Member-UUID") String memberUuid,
+            @Valid @RequestBody CreateProfileReqVo createProfileReqVo
+    ) {
+        profileService.createProfile(CreateProfileReqDto.of(memberUuid, createProfileReqVo));
+        return new BaseResponseEntity<>(ResponseMessage.SUCCESS_CREATE_PROFILE.getMessage());
     }
 }

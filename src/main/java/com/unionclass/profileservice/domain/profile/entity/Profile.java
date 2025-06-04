@@ -23,11 +23,10 @@ public class Profile extends BaseDocument {
     private String alt;
 
     private Long categoryListId;
-    private Long activeHistoryId;
 
     @Builder
     public Profile(String id, String memberUuid, String nickname, String selfIntroduction,
-                   String imageUrl, String alt, Long categoryListId, Long activeHistoryId
+                   String imageUrl, String alt, Long categoryListId
     ) {
         this.id = id;
         this.memberUuid = memberUuid;
@@ -36,7 +35,6 @@ public class Profile extends BaseDocument {
         this.imageUrl = imageUrl;
         this.alt = alt;
         this.categoryListId = categoryListId;
-        this.activeHistoryId = activeHistoryId;
     }
 
     public void changeNickname(String nickname) {

@@ -19,21 +19,22 @@ public class Profile extends BaseDocument {
     private String nickname;
 
     private String selfIntroduction;
-    private String image;
+    private String imageUrl;
+    private String alt;
 
     private Long categoryListId;
     private Long activeHistoryId;
 
     @Builder
-    public Profile(
-            String id, String memberUuid, String nickname, String selfIntroduction,
-            String image, Long categoryListId, Long activeHistoryId
+    public Profile(String id, String memberUuid, String nickname, String selfIntroduction,
+                   String imageUrl, String alt, Long categoryListId, Long activeHistoryId
     ) {
         this.id = id;
         this.memberUuid = memberUuid;
         this.nickname = nickname;
         this.selfIntroduction = selfIntroduction;
-        this.image = image;
+        this.imageUrl = imageUrl;
+        this.alt = alt;
         this.categoryListId = categoryListId;
         this.activeHistoryId = activeHistoryId;
     }

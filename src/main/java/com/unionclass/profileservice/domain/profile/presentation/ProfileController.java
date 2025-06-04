@@ -9,6 +9,7 @@ import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDt
 import com.unionclass.profileservice.domain.profile.vo.in.ChangeNicknameReqVo;
 import com.unionclass.profileservice.domain.profile.vo.in.GetNicknameReqVo;
 import com.unionclass.profileservice.domain.profile.vo.in.RegisterNicknameReqVo;
+import com.unionclass.profileservice.domain.profile.vo.out.GetAuthorInfoVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -39,9 +40,8 @@ public class ProfileController {
      */
     @Operation(
             summary = "닉네임 등록",
-            hidden = true,
             description = """
-                    사용자가 회원가입할 때 닉네임은 프로필에 저장 시 사용되는 API 입니다.
+                    사용자가 회원가입할 때 닉네임은 프로필에 저장 시 내부 호출용으로 사용되는 API 입니다.
                 
                     [요청 바디]
                     - memberUuid : (String) 회원 고유 식별자
@@ -128,5 +128,36 @@ public class ProfileController {
     ) {
         profileService.changeNickname(ChangeNicknameReqDto.of(memberUuid, changeNicknameReqVo));
         return new BaseResponseEntity<>(ResponseMessage.SUCCESS_CHANGE_NICKNAME.getMessage());
+    }
+
+    @Operation(
+            summary = "작성자 프로필 조회",
+            description = """
+                    작성자의 닉네임 및 관련 프로필 정보를 조회하는 API 이며, 내부 호출용으로 사용됩니다.
+                    
+                    [요청 경로]
+                    - GET /api/v1/profile/author/{memberUuid}
+                    - PathVariable: memberUuid (String) - 조회할 작성자의 UUID
+        
+                    [응답 필드]
+                    - nickname: (String) 작성자의 닉네임
+                    - profileImageUrl: (String) 작성자의 프로필 이미지 URL
+                    - alt: (String) 이미지 대체 텍스트
+        
+                    [처리 로직]
+                    - memberUuid 를 기준으로 Profile 컬렉션에서 작성자 정보 조회
+                    - 존재하지 않을 경우 예외 발생
+        
+                    [예외 상황]
+                    - NO_EXIST_MEMBER: 해당 UUID 에 대한 프로필 정보가 존재하지 않는 경우
+                    """
+    )
+    @GetMapping("/author/{memberUuid}")
+    public BaseResponseEntity<GetAuthorInfoVo> getAuthorInfo(
+            @PathVariable String memberUuid
+    ) {
+        return new BaseResponseEntity<>(
+                ResponseMessage.SUCCESS_GET_AUTHOR_INFORMATION.getMessage(),
+                profileService.getAuthorInfo(memberUuid).toVo());
     }
 }

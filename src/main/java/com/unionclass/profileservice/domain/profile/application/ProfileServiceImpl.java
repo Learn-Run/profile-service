@@ -5,6 +5,7 @@ import com.unionclass.profileservice.common.exception.ErrorCode;
 import com.unionclass.profileservice.domain.profile.dto.in.ChangeNicknameReqDto;
 import com.unionclass.profileservice.domain.profile.dto.in.GetNicknameReqDto;
 import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.infrastructure.ProfileRepository;
 import lombok.RequiredArgsConstructor;
@@ -77,5 +78,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info("닉네임 변경 완료 - Member UUID: {}, 새로운 닉네임: {}",
                 changeNicknameReqDto.getMemberUuid(),
                 profile.getNickname());
+    }
+
+    @Override
+    public GetAuthorInfoDto getAuthorInfo(String memberUuid) {
+        return GetAuthorInfoDto.from(profileRepository.findByMemberUuid(memberUuid)
+                .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER)));
     }
 }

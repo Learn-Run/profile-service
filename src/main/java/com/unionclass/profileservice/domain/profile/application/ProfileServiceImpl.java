@@ -2,9 +2,8 @@ package com.unionclass.profileservice.domain.profile.application;
 
 import com.unionclass.profileservice.common.exception.BaseException;
 import com.unionclass.profileservice.common.exception.ErrorCode;
-import com.unionclass.profileservice.domain.profile.dto.in.ChangeNicknameReqDto;
-import com.unionclass.profileservice.domain.profile.dto.in.GetNicknameReqDto;
-import com.unionclass.profileservice.domain.profile.dto.in.RegisterNicknameReqDto;
+import com.unionclass.profileservice.domain.profile.dto.in.*;
+import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.infrastructure.ProfileRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +23,8 @@ public class ProfileServiceImpl implements ProfileService {
      * /api/v1/profile
      *
      * 1. (회원가입 시) 닉네임 등록
+     * 2. 닉네임 중복 검사
+     * 3. 닉네임 변경
      */
 
     /**
@@ -48,7 +49,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     /**
-     * 5. 닉네임 중복 검사
+     * 2. 닉네임 중복 검사
      *
      * @param getNicknameReqDto
      */
@@ -77,5 +78,55 @@ public class ProfileServiceImpl implements ProfileService {
         log.info("닉네임 변경 완료 - Member UUID: {}, 새로운 닉네임: {}",
                 changeNicknameReqDto.getMemberUuid(),
                 profile.getNickname());
+    }
+
+    /**
+     * 4. 작성자 프로필 조회
+     *
+     * @param memberUuid
+     * @return
+     */
+    @Override
+    public GetAuthorInfoDto getAuthorInfo(String memberUuid) {
+        return GetAuthorInfoDto.from(profileRepository.findByMemberUuid(memberUuid)
+                .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER)));
+    }
+
+    /**
+     * 5. 프로필 생성
+     *
+     * @param createProfileReqDto
+     */
+    @Transactional
+    @Override
+    public void createProfile(CreateProfileReqDto createProfileReqDto) {
+        try {
+            profileRepository.save(
+                    createProfileReqDto.toEntity(profileRepository.findByMemberUuid(createProfileReqDto.getMemberUuid())
+                            .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER))));
+            log.info("프로필 생성 완료 - Member UUID: {}", createProfileReqDto.getMemberUuid());
+        } catch (Exception e) {
+            log.warn("프로필 생성 실패 - Member UUID: {}", createProfileReqDto.getMemberUuid());
+            throw new BaseException(ErrorCode.FAILED_TO_CREATE_PROFILE);
+        }
+    }
+
+    /**
+     * 6. 프로필 변경
+     *
+     * @param updateProfileReqDto
+     */
+    @Transactional
+    @Override
+    public void updateProfile(UpdateProfileReqDto updateProfileReqDto) {
+        try {
+            profileRepository.save(
+                    updateProfileReqDto.toEntity(profileRepository.findByMemberUuid(updateProfileReqDto.getMemberUuid())
+                            .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER))));
+            log.info("프로필 변경 완료 - Member UUID: {}", updateProfileReqDto.getMemberUuid());
+        } catch (Exception e) {
+            log.warn("프로필 변경 실패 - Member UUID: {}", updateProfileReqDto.getMemberUuid());
+            throw new BaseException(ErrorCode.FAILED_TO_UPDATE_PROFILE);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.unionclass.profileservice.domain.profile.entity;
 
 import com.unionclass.profileservice.common.entity.BaseDocument;
-import com.unionclass.profileservice.domain.profile.dto.in.CreateProfileReqDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,23 +20,25 @@ public class Profile extends BaseDocument {
     private String memberUuid;
     private String nickname;
 
+    private Image image;
     private String selfIntroduction;
-    private String imageUrl;
-    private String alt;
 
     private List<Long> categoryListIds;
 
+    private Grade grade;
+
     @Builder
-    public Profile(String id, String memberUuid, String nickname, String selfIntroduction,
-                   String imageUrl, String alt, List<Long> categoryListIds
+    public Profile(
+            String id, String memberUuid, String nickname, Image image,
+            String selfIntroduction, List<Long> categoryListIds, Grade grade
     ) {
         this.id = id;
         this.memberUuid = memberUuid;
         this.nickname = nickname;
+        this.image = image;
         this.selfIntroduction = selfIntroduction;
-        this.imageUrl = imageUrl;
-        this.alt = alt;
         this.categoryListIds = categoryListIds;
+        this.grade = grade;
     }
 
     public void changeNickname(String nickname) {

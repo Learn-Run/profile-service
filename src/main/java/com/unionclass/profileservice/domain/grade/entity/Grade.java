@@ -1,13 +1,11 @@
 package com.unionclass.profileservice.domain.grade.entity;
 
 import com.unionclass.profileservice.common.entity.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 
 import java.math.BigDecimal;
 
@@ -19,9 +17,17 @@ public class Grade extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Comment("등급명")
+    @Column(nullable = false, unique = true, length = 20)
     private String name;
 
+    @Comment("등급 조건 설명")
+    @Column(nullable = false, length = 255)
     private String requirement;
+
+    @Comment("수수료 할인율")
+    @Column(precision = 5, scale = 2)
     private BigDecimal commissionDiscountRate;
 
     @Builder

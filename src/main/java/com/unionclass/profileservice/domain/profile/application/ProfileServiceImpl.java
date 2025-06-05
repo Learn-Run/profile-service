@@ -4,8 +4,11 @@ import com.unionclass.profileservice.common.exception.BaseException;
 import com.unionclass.profileservice.common.exception.ErrorCode;
 import com.unionclass.profileservice.domain.profile.dto.in.*;
 import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
+import com.unionclass.profileservice.domain.profile.entity.Grade;
+import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.infrastructure.ProfileRepository;
+import com.unionclass.profileservice.domain.profile.util.ImageAltTextTemplateProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
+    private final ImageAltTextTemplateProvider imageAltTextTemplateProvider;
+
+    private final Long gradeId = 1L;
+    private final String gradeName = "WHITE";
 
     /**
      * /api/v1/profile
@@ -101,9 +108,21 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void createProfile(CreateProfileReqDto createProfileReqDto) {
         try {
-            profileRepository.save(
-                    createProfileReqDto.toEntity(profileRepository.findByMemberUuid(createProfileReqDto.getMemberUuid())
-                            .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER))));
+            Profile profile = profileRepository.findByMemberUuid(createProfileReqDto.getMemberUuid()) 
+                    .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER));
+
+            profileRepository.save(createProfileReqDto.toEntity(
+                    profile,
+                    Image.builder()
+                            .type(createProfileReqDto.getImageType())
+                            .imageUrl(createProfileReqDto.getProfileImageUrl())
+                            .alt(imageAltTextTemplateProvider.getProfileImageAltTextTemplate(profile.getNickname()))
+                            .build(),
+                    Grade.builder()
+                            .id(gradeId)
+                            .name(gradeName)
+                            .build()));
+
             log.info("프로필 생성 완료 - Member UUID: {}", createProfileReqDto.getMemberUuid());
         } catch (Exception e) {
             log.warn("프로필 생성 실패 - Member UUID: {}", createProfileReqDto.getMemberUuid());

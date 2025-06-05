@@ -27,8 +27,8 @@ public class GetAuthorInfoDto {
         return GetAuthorInfoDto.builder()
                 .memberUuid(profile.getMemberUuid())
                 .nickname(profile.getNickname())
-                .profileImageUrl(profile.getImageUrl())
-                .alt(profile.getAlt())
+                .profileImageUrl(profile.getImage().getImageUrl())
+                .alt(profile.getImage().getAlt())
                 .build();
     }
 

@@ -49,8 +49,9 @@ public class UpdateProfileReqDto {
                 .memberUuid(memberUuid)
                 .nickname(nickname == null ? profile.getNickname() : nickname)
                 .selfIntroduction(selfIntroduction == null ? profile.getSelfIntroduction() : selfIntroduction)
-                .imageUrl(imageUrl == null ? profile.getImageUrl() : imageUrl)
-                .alt(alt == null ? profile.getAlt() : alt)
+//                .image()
+//                .imageUrl(imageUrl == null ? profile.getImageUrl() : imageUrl)
+//                .alt(alt == null ? profile.getAlt() : alt)
                 .categoryListIds(categoryListIds == null ? profile.getCategoryListIds() : categoryListIds)
                 .build();
     }

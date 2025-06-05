@@ -72,6 +72,7 @@ public enum ErrorCode {
     FAILED_TO_UPDATE_PROFILE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1202, "프로필 변경에 실패하였습니다."),
     FAILED_TO_CREATE_GRADE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1203, "등급 생성에 실패하였습니다."),
     FAILED_TO_FIND_GRADE(HttpStatus.BAD_REQUEST, false, 1204, "등급 조회에 실패하였습니다."),
+    INVALID_IMAGE_TYPE(HttpStatus.BAD_REQUEST, false, 1205, "지원하지 않는 Image 타입입니다.")
     ;
 
     /**

@@ -13,15 +13,15 @@ import java.math.BigDecimal;
 public class CreateGradeReqDto {
 
     private String gradeName;
+    private int gradeLevel;
     private String gradeRequirement;
     private boolean defaultStatus;
     private BigDecimal commissionDiscountRate;
 
     @Builder
-    public CreateGradeReqDto(
-            String gradeName, String gradeRequirement, boolean defaultStatus, BigDecimal commissionDiscountRate
-    ) {
+    public CreateGradeReqDto(String gradeName, int gradeLevel, String gradeRequirement, boolean defaultStatus, BigDecimal commissionDiscountRate) {
         this.gradeName = gradeName;
+        this.gradeLevel = gradeLevel;
         this.gradeRequirement = gradeRequirement;
         this.defaultStatus = defaultStatus;
         this.commissionDiscountRate = commissionDiscountRate;
@@ -30,6 +30,7 @@ public class CreateGradeReqDto {
     public static CreateGradeReqDto from(CreateGradeReqVo createGradeReqVo) {
         return CreateGradeReqDto.builder()
                 .gradeName(createGradeReqVo.getGradeName())
+                .gradeLevel(createGradeReqVo.getGradeLevel())
                 .gradeRequirement(createGradeReqVo.getGradeRequirement())
                 .defaultStatus(createGradeReqVo.isDefaultStatus())
                 .commissionDiscountRate(createGradeReqVo.getCommissionDiscountRate())
@@ -39,6 +40,7 @@ public class CreateGradeReqDto {
     public Grade toEntity() {
         return Grade.builder()
                 .name(gradeName)
+                .level(gradeLevel)
                 .requirement(gradeRequirement)
                 .defaultStatus(defaultStatus)
                 .commissionDiscountRate(commissionDiscountRate)

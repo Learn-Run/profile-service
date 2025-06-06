@@ -146,22 +146,19 @@ public class ProfileController {
                     - PathVariable: memberUuid (String) - 조회할 작성자의 UUID
         
                     [응답 필드]
+                    - memberUuid: (String) 조회할 작성자의 UUID
                     - nickname: (String) 작성자의 닉네임
-                    - profileImageUrl: (String) 작성자의 프로필 이미지 URL
-                    - alt: (String) 이미지 대체 텍스트
+                    - profileImage(type, imageUrl, alt)
         
                     [처리 로직]
                     - memberUuid 를 기준으로 Profile 컬렉션에서 작성자 정보 조회
-                    - 존재하지 않을 경우 예외 발생
         
                     [예외 상황]
                     - NO_EXIST_MEMBER: 해당 UUID 에 대한 프로필 정보가 존재하지 않는 경우
                     """
     )
     @GetMapping("/author/{memberUuid}")
-    public BaseResponseEntity<GetAuthorInfoVo> getAuthorInfo(
-            @PathVariable String memberUuid
-    ) {
+    public BaseResponseEntity<GetAuthorInfoVo> getAuthorInfo(@PathVariable String memberUuid) {
         return new BaseResponseEntity<>(
                 ResponseMessage.SUCCESS_GET_AUTHOR_INFORMATION.getMessage(),
                 profileService.getAuthorInfo(memberUuid).toVo());

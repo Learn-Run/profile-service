@@ -137,7 +137,7 @@ public class ProfileServiceImpl implements ProfileService {
      */
     @Transactional
     @Override
-    public void updateProfile(UpdateProfileInfoReqDto updateProfileInfoReqDto) {
+    public void updateProfileInfo(UpdateProfileInfoReqDto updateProfileInfoReqDto) {
         try {
             profileRepository.save(
                     updateProfileInfoReqDto.toEntity(profileRepository.findByMemberUuid(updateProfileInfoReqDto.getMemberUuid())

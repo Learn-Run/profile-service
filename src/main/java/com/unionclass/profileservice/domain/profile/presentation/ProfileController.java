@@ -231,12 +231,12 @@ public class ProfileController {
                     - FAILED_TO_UPDATE_PROFILE : 프로필 정보 변경 실패
                     """
     )
-    @PutMapping
-    public BaseResponseEntity<Void> updateProfile(
+    @PutMapping("/info")
+    public BaseResponseEntity<Void> updateProfileInfo(
             @RequestHeader("X-Member-UUID") String memberUuid,
             @Valid @RequestBody UpdateProfileInfoReqVo updateProfileInfoReqVo
     ) {
-        profileService.updateProfile(UpdateProfileInfoReqDto.of(memberUuid, updateProfileInfoReqVo));
+        profileService.updateProfileInfo(UpdateProfileInfoReqDto.of(memberUuid, updateProfileInfoReqVo));
         return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE_INFORMATION.getMessage());
     }
 }

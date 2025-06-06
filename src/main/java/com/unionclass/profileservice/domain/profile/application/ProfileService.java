@@ -10,5 +10,5 @@ public interface ProfileService {
     void changeNickname(ChangeNicknameReqDto changeNicknameReqDto);
     GetAuthorInfoDto getAuthorInfo(String memberUuid);
     void createProfile(CreateProfileReqDto createProfileReqDto);
-    void updateProfile(UpdateProfileInfoReqDto updateProfileInfoReqDto);
+    void updateProfileInfo(UpdateProfileInfoReqDto updateProfileInfoReqDto);
 }

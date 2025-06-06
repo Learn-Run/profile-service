@@ -1,6 +1,7 @@
 package com.unionclass.profileservice.domain.profile.entity;
 
 import com.unionclass.profileservice.common.entity.BaseDocument;
+import com.unionclass.profileservice.domain.grade.entity.Grade;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -176,23 +176,24 @@ public class ProfileController {
             summary = "프로필 생성",
             description = """
                     회원의 프로필 상세 정보를 등록해서 프로필을 생성하는 API 입니다.
-
+        
                     [요청 헤더]
                     - X-Member-UUID : (String) 회원의 고유 식별자
-
+        
                     [요청 바디]
                     - selfIntroduction : (String) 자기소개
-                    - imageUrl : (String) 프로필 이미지 URL
-                    - alt : (String) 이미지 대체 텍스트
+                    - imageType : (String) 이미지 타입 (jpg, jpeg, png, gif, webp, svg, heic)
+                    - profileImageUrl : (String) 프로필 이미지 URL
                     - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
-
+        
                     [처리 로직]
-                    - 상세 정보를 추가하여 프로필을 생성합니다.
-                    - MongoDB `profile` 컬렉션에 저장됩니다.
-
+                    - 회원의 UUID 로 기존 프로필을 조회합니다.
+                    - 닉네임 기반으로 alt 텍스트를 생성합니다. ("{nickname}의 프로필 이미지입니다.")
+                    - 기본 등급 (gradeId : 1, gradeName : WHITE) 을 설정합니다.
+                    - MongoDB의 profile 컬렉션에 상세 정보를 포함한 새 프로필을 저장합니다.
+        
                     [예외 상황]
-                    - NO_EXIST_MEMBER : 해당 UUID 를 가진 회원 정보가 존재하지 않음
-                    - FAILED_TO_CREATE_PROFILE : 프로필 생성 중 내부 서버 오류
+                    - FAILED_TO_CREATE_PROFILE : 프로필 생성 실패
                     """
     )
     @PostMapping
@@ -205,13 +206,13 @@ public class ProfileController {
     }
 
     /**
-     * 6. 프로필 변경
+     * 6. 프로필 정보 변경
      *
      * @param memberUuid
-     * @param updateProfileReqVo
+     * @param updateProfileInfoReqVo
      */
     @Operation(
-            summary = "프로필 변경",
+            summary = "프로필 정보 변경",
             description = """
                     사용자의 프로필 정보를 변경하는 API 입니다.
             
@@ -219,27 +220,23 @@ public class ProfileController {
                     - X-Member-UUID : (String) 회원의 고유 식별자
             
                     [요청 바디]
-                    - nickname : (String, optional) 닉네임
-                    - selfIntroduction : (String, optional) 자기소개
-                    - imageUrl : (String, optional) 프로필 이미지 URL
-                    - alt : (String, optional) 이미지 대체 텍스트 (접근성 대응)
-                    - categoryListIds : (List<Long>, optional) 관심 카테고리 ID 목록
+                    - selfIntroduction : (String) 자기소개
+                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
             
                     [처리 로직]
                     - memberUuid 로 기존 프로필을 조회
                     - 전달받은 값만 반영하여 기존 값과 병합 후 저장
             
                     [예외 상황]
-                    - NO_EXIST_MEMBER : 해당하는 회원의 프로필이 존재하지 않을 경우
-                    - FAILED_TO_UPDATE_PROFILE : 프로필 변경 중 내부 서버 오류
+                    - FAILED_TO_UPDATE_PROFILE : 프로필 정보 변경 실패
                     """
     )
     @PutMapping
     public BaseResponseEntity<Void> updateProfile(
             @RequestHeader("X-Member-UUID") String memberUuid,
-            @Valid @RequestBody UpdateProfileReqVo updateProfileReqVo
+            @Valid @RequestBody UpdateProfileInfoReqVo updateProfileInfoReqVo
     ) {
-        profileService.updateProfile(UpdateProfileReqDto.of(memberUuid, updateProfileReqVo));
+        profileService.updateProfile(UpdateProfileInfoReqDto.of(memberUuid, updateProfileInfoReqVo));
         return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE.getMessage());
     }
 }

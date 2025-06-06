@@ -1,11 +1,10 @@
 package com.unionclass.profileservice.domain.profile.dto.in;
 
-import com.unionclass.profileservice.domain.profile.entity.Grade;
+import com.unionclass.profileservice.domain.grade.entity.Grade;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.enums.ImageType;
 import com.unionclass.profileservice.domain.profile.vo.in.CreateProfileReqVo;
-import jakarta.validation.Valid;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

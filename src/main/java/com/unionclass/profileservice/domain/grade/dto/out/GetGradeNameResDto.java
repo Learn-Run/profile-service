@@ -10,21 +10,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetGradeNameResDto {
 
+    private Long gradeId;
     private String gradeName;
 
     @Builder
-    public GetGradeNameResDto(String gradeName) {
+    public GetGradeNameResDto(Long gradeId, String gradeName) {
+        this.gradeId = gradeId;
         this.gradeName = gradeName;
     }
 
     public static GetGradeNameResDto from(Grade grade) {
         return GetGradeNameResDto.builder()
+                .gradeId(grade.getId())
                 .gradeName(grade.getName())
                 .build();
     }
 
     public GetGradeNameResVo toVo() {
         return GetGradeNameResVo.builder()
+                .gradeId(gradeId)
                 .gradeName(gradeName)
                 .build();
     }

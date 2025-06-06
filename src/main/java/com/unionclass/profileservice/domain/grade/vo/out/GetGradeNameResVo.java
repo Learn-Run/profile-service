@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetGradeNameResVo {
 
+    private Long gradeId;
     private String gradeName;
 
     @Builder
-    public GetGradeNameResVo(String gradeName) {
+    public GetGradeNameResVo(Long gradeId, String gradeName) {
+        this.gradeId = gradeId;
         this.gradeName = gradeName;
     }
 }

@@ -36,8 +36,11 @@ public class UpdateProfileInfoReqDto {
         return Profile.builder()
                 .id(profile.getId())
                 .memberUuid(memberUuid)
+                .nickname(profile.getNickname())
+                .image(profile.getImage())
                 .selfIntroduction(selfIntroduction == null ? profile.getSelfIntroduction() : selfIntroduction)
                 .categoryListIds(categoryListIds == null ? profile.getCategoryListIds() : categoryListIds)
+                .grade(profile.getGrade())
                 .build();
     }
 }

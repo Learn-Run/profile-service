@@ -237,6 +237,6 @@ public class ProfileController {
             @Valid @RequestBody UpdateProfileInfoReqVo updateProfileInfoReqVo
     ) {
         profileService.updateProfile(UpdateProfileInfoReqDto.of(memberUuid, updateProfileInfoReqVo));
-        return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE.getMessage());
+        return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE_INFORMATION.getMessage());
     }
 }

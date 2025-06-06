@@ -14,12 +14,16 @@ public class CreateGradeReqDto {
 
     private String gradeName;
     private String gradeRequirement;
+    private boolean defaultStatus;
     private BigDecimal commissionDiscountRate;
 
     @Builder
-    public CreateGradeReqDto(String gradeName, String gradeRequirement, BigDecimal commissionDiscountRate) {
+    public CreateGradeReqDto(
+            String gradeName, String gradeRequirement, boolean defaultStatus, BigDecimal commissionDiscountRate
+    ) {
         this.gradeName = gradeName;
         this.gradeRequirement = gradeRequirement;
+        this.defaultStatus = defaultStatus;
         this.commissionDiscountRate = commissionDiscountRate;
     }
 
@@ -27,15 +31,17 @@ public class CreateGradeReqDto {
         return CreateGradeReqDto.builder()
                 .gradeName(createGradeReqVo.getGradeName())
                 .gradeRequirement(createGradeReqVo.getGradeRequirement())
+                .defaultStatus(createGradeReqVo.isDefaultStatus())
                 .commissionDiscountRate(createGradeReqVo.getCommissionDiscountRate())
                 .build();
     }
 
-    public Grade toEntity(CreateGradeReqDto createGradeReqDto) {
+    public Grade toEntity() {
         return Grade.builder()
-                .name(createGradeReqDto.gradeName)
-                .requirement(createGradeReqDto.gradeRequirement)
-                .commissionDiscountRate(createGradeReqDto.commissionDiscountRate)
+                .name(gradeName)
+                .requirement(gradeRequirement)
+                .defaultStatus(defaultStatus)
+                .commissionDiscountRate(commissionDiscountRate)
                 .build();
     }
 }

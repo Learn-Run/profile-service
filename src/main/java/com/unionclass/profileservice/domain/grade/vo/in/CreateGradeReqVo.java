@@ -9,5 +9,6 @@ public class CreateGradeReqVo {
 
     private String gradeName;
     private String gradeRequirement;
+    private boolean defaultStatus;
     private BigDecimal commissionDiscountRate;
 }

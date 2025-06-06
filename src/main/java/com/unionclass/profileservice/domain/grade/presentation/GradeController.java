@@ -48,6 +48,7 @@ public class GradeController {
                     [요청 바디]
                     - gradeName : (String) 등급 이름 (SILVER, GOLD, PLATINUM, DIAMOND, MASTER)
                     - gradeRequirement : (String) 등급 조건 설명
+                    - defaultStatus : (boolean) 기본 등급 여부
                     - commissionDiscountRate : (BigDecimal) 수수료 할인율
         
                     [처리 로직]

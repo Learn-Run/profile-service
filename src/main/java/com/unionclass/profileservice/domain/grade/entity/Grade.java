@@ -26,15 +26,20 @@ public class Grade extends BaseEntity {
     @Column(nullable = false, length = 255)
     private String requirement;
 
+    @Comment("기본 등급 여부")
+    @Column(nullable = false)
+    private boolean defaultStatus;
+
     @Comment("수수료 할인율")
     @Column(precision = 5, scale = 2)
     private BigDecimal commissionDiscountRate;
 
     @Builder
-    public Grade(Long id, String name, String requirement, BigDecimal commissionDiscountRate) {
+    public Grade(Long id, String name, String requirement, boolean defaultStatus, BigDecimal commissionDiscountRate) {
         this.id = id;
         this.name = name;
         this.requirement = requirement;
+        this.defaultStatus = defaultStatus;
         this.commissionDiscountRate = commissionDiscountRate;
     }
 }

@@ -26,7 +26,7 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public void createGrade(CreateGradeReqDto createGradeReqDto) {
         try {
-            gradeRepository.save(createGradeReqDto.toEntity(createGradeReqDto));
+            gradeRepository.save(createGradeReqDto.toEntity());
             log.info("등급 생성 성공 - 등급명 : {}", createGradeReqDto.getGradeName());
         } catch (Exception e) {
             log.warn("등급 생성 실패 - 등급명 : {}", createGradeReqDto.getGradeName());

@@ -191,7 +191,7 @@ public class ProfileController {
                     [처리 로직]
                     - 회원의 UUID 로 기존 프로필을 조회합니다.
                     - 닉네임 기반으로 alt 텍스트를 생성합니다. ("{nickname}의 프로필 이미지입니다.")
-                    - 기본 등급 (gradeId : 1, gradeName : WHITE) 을 설정합니다.
+                    - 기본 등급으로 설정됩니다.
                     - MongoDB의 profile 컬렉션에 상세 정보를 포함한 새 프로필을 저장합니다.
         
                     [예외 상황]

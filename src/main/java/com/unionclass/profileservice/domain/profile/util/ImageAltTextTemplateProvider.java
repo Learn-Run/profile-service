@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public class ImageAltTextTemplateProvider {
 
     public String getProfileImageAltTextTemplate(String nickname) {
-        return nickname + "의 프로필 이미지입니다.";
+        return nickname + " 의 프로필 이미지입니다.";
     }
 }

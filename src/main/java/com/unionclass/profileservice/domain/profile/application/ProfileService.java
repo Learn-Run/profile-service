@@ -11,4 +11,6 @@ public interface ProfileService {
     GetAuthorInfoDto getAuthorInfo(String memberUuid);
     void createProfile(CreateProfileReqDto createProfileReqDto);
     void updateProfileInfo(UpdateProfileInfoReqDto updateProfileInfoReqDto);
+
+    void updateProfileImage(UpdateProfileImageReqDto updateProfileImageReqDto);
 }

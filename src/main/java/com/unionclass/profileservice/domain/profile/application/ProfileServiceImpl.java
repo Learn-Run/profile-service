@@ -32,6 +32,10 @@ public class ProfileServiceImpl implements ProfileService {
      * 1. (회원가입 시) 닉네임 등록
      * 2. 닉네임 중복 검사
      * 3. 닉네임 변경
+     * 4. 작성자 프로필 조회
+     * 5. 프로필 생성
+     * 6. 프로필 정보 변경
+     * 7. 프로필 이미지 변경
      */
 
     /**
@@ -142,10 +146,31 @@ public class ProfileServiceImpl implements ProfileService {
             profileRepository.save(
                     updateProfileInfoReqDto.toEntity(profileRepository.findByMemberUuid(updateProfileInfoReqDto.getMemberUuid())
                             .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER))));
-            log.info("프로필 변경 완료 - Member UUID: {}", updateProfileInfoReqDto.getMemberUuid());
+            log.info("프로필 정보 변경 완료 - Member UUID: {}", updateProfileInfoReqDto.getMemberUuid());
         } catch (Exception e) {
-            log.warn("프로필 변경 실패 - Member UUID: {}", updateProfileInfoReqDto.getMemberUuid());
-            throw new BaseException(ErrorCode.FAILED_TO_UPDATE_PROFILE);
+            log.warn("프로필 정보 변경 실패 - Member UUID: {}", updateProfileInfoReqDto.getMemberUuid());
+            throw new BaseException(ErrorCode.FAILED_TO_UPDATE_PROFILE_INFORMATION);
+        }
+    }
+
+    /**
+     * 7. 프로필 이미지 변경
+     *
+     * @param updateProfileImageReqDto
+     */
+    @Transactional
+    @Override
+    public void updateProfileImage(UpdateProfileImageReqDto updateProfileImageReqDto) {
+        try {
+            profileRepository.save(
+                    updateProfileImageReqDto.toEntity(
+                            profileRepository.findByMemberUuid(updateProfileImageReqDto.getMemberUuid())
+                                    .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER)))
+            );
+            log.info("프로필 이미지 변경 완료 - Member UUID: {}", updateProfileImageReqDto.getMemberUuid());
+        } catch (Exception e) {
+            log.warn("프로필 이미지 변경 실패 - Member UUID: {}", updateProfileImageReqDto.getMemberUuid());
+            throw new BaseException(ErrorCode.FAILED_TO_UPDATE_PROFILE_IMAGE);
         }
     }
 }

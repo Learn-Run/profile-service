@@ -28,6 +28,8 @@ public class ProfileController {
      * 3. 닉네임 변경
      * 4. 작성자 프로필 조회
      * 5. 프로필 생성
+     * 6. 프로필 정보 변경
+     * 7. 프로필 이미지 변경
      */
 
     /**
@@ -228,7 +230,7 @@ public class ProfileController {
                     - 전달받은 값만 반영하여 기존 값과 병합 후 저장
             
                     [예외 상황]
-                    - FAILED_TO_UPDATE_PROFILE : 프로필 정보 변경 실패
+                    - FAILED_TO_UPDATE_PROFILE_INFORMATION : 프로필 정보 변경 실패
                     """
     )
     @PutMapping("/info")
@@ -238,5 +240,42 @@ public class ProfileController {
     ) {
         profileService.updateProfileInfo(UpdateProfileInfoReqDto.of(memberUuid, updateProfileInfoReqVo));
         return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE_INFORMATION.getMessage());
+    }
+
+    /**
+     * 7. 프로필 이미지 변경
+     *
+     * @param memberUuid
+     * @param updateProfileImageReqVo
+     * @return
+     */
+    @Operation(
+            summary = "프로필 이미지 변경",
+            description = """
+                    사용자의 프로필 이미지를 변경하는 API 입니다.
+            
+                    [요청 헤더]
+                    - X-Member-UUID : (String) 회원의 고유 식별자
+            
+                    [요청 바디]
+                    - imageType : (String) 이미지 타입 (jpg, jpeg, png, gif, webp, svg, heic)
+                    - profileImageUrl : (String) 프로필 이미지 URL
+                    - alt : 프로필 이미지 대체 텍스트
+            
+                    [처리 로직]
+                    - memberUuid 로 기존 프로필을 조회
+                    - 전달받은 값만 반영하여 기존 값과 병합 후 저장
+            
+                    [예외 상황]
+                    - FAILED_TO_UPDATE_PROFILE_IMAGE : 프로필 이미지 변경 실패
+                    """
+    )
+    @PutMapping("/image")
+    public BaseResponseEntity<Void> updateProfileImage(
+            @RequestHeader("X-Member-UUID") String memberUuid,
+            @Valid @RequestBody UpdateProfileImageReqVo updateProfileImageReqVo
+    ) {
+        profileService.updateProfileImage(UpdateProfileImageReqDto.of(memberUuid, updateProfileImageReqVo));
+        return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE_IMAGE.getMessage());
     }
 }

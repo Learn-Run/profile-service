@@ -16,6 +16,7 @@ public enum ResponseMessage {
     SUCCESS_CREATE_GRADE("등급 생성에 성공하였습니다."),
     SUCCESS_GET_ALL_GRADES("등급 전체 조회에 성공하였습니다."),
     SUCCESS_GET_GRADE_NAME("등급명 조회에 성공하였습니다."),
+    SUCCESS_UPDATE_PROFILE_IMAGE("프로필 이미지 변경에 성공하였습니다.")
     ;
 
     private final String message;

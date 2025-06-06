@@ -4,7 +4,6 @@ import com.unionclass.profileservice.common.exception.BaseException;
 import com.unionclass.profileservice.common.exception.ErrorCode;
 import com.unionclass.profileservice.domain.grade.dto.in.CreateGradeReqDto;
 import com.unionclass.profileservice.domain.grade.dto.out.GetAllGradeResDto;
-import com.unionclass.profileservice.domain.grade.dto.out.GetGradeNameResDto;
 import com.unionclass.profileservice.domain.grade.entity.Grade;
 import com.unionclass.profileservice.domain.grade.infrastructure.GradeRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +39,7 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public GetGradeNameResDto getGradeNameByGradeId(Long gradeId) {
-        return GetGradeNameResDto.from(gradeRepository.findById(gradeId)
-                .orElseThrow(() -> new BaseException(ErrorCode.FAILED_TO_FIND_GRADE)));
+    public Grade getDefaultGradeInfo() {
+        return gradeRepository.findByDefaultStatusTrue();
     }
 }

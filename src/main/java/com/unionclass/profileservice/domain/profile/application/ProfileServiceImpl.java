@@ -2,6 +2,7 @@ package com.unionclass.profileservice.domain.profile.application;
 
 import com.unionclass.profileservice.common.exception.BaseException;
 import com.unionclass.profileservice.common.exception.ErrorCode;
+import com.unionclass.profileservice.domain.grade.application.GradeService;
 import com.unionclass.profileservice.domain.grade.entity.Grade;
 import com.unionclass.profileservice.domain.profile.dto.in.*;
 import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
@@ -22,9 +23,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
     private final ImageAltTextTemplateProvider imageAltTextTemplateProvider;
-
-    private final Long gradeId = 1L;
-    private final String gradeName = "WHITE";
+    private final GradeService gradeService;
 
     /**
      * /api/v1/profile
@@ -123,8 +122,8 @@ public class ProfileServiceImpl implements ProfileService {
                             .alt(imageAltTextTemplateProvider.getProfileImageAltTextTemplate(profile.getNickname()))
                             .build(),
                     Grade.builder()
-                            .id(gradeId)
-                            .name(gradeName)
+                            .id(gradeService.getDefaultGradeInfo().getId())
+                            .name(gradeService.getDefaultGradeInfo().getName())
                             .build()));
 
             log.info("프로필 생성 완료 - Member UUID: {}", createProfileReqDto.getMemberUuid());

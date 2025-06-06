@@ -6,6 +6,7 @@ import com.unionclass.profileservice.domain.profile.application.ProfileService;
 import com.unionclass.profileservice.domain.profile.dto.in.*;
 import com.unionclass.profileservice.domain.profile.vo.in.*;
 import com.unionclass.profileservice.domain.profile.vo.out.GetAuthorInfoVo;
+import com.unionclass.profileservice.domain.profile.vo.out.GetProfileInfoResVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -274,5 +275,84 @@ public class ProfileController {
     ) {
         profileService.updateProfileImage(UpdateProfileImageReqDto.of(memberUuid, updateProfileImageReqVo));
         return new BaseResponseEntity<>(ResponseMessage.SUCCESS_UPDATE_PROFILE_IMAGE.getMessage());
+    }
+
+    /**
+     * 8. 내 프로필 정보 조회
+     *
+     * @param memberUuid
+     * @return
+     */
+    @Operation(
+            summary = "내 프로필 정보 조회",
+            description = """
+                    나의 프로필 상세 정보를 조회하는 API 입니다.
+                    
+                    [요청 헤더]
+                    - X-Member-UUID : (String) 필수, 회원의 고유 식별자
+                    
+                    [응답 필드]
+                    - gradeName : (String) 등급명
+                    - nickname : (String) 회원 닉네임
+                    - profileImage : (객체) 프로필 이미지 정보
+                        - type : (String) 이미지 타입 (jpg, jpeg, png, gif, webp, svg, heic)
+                        - imageUrl : (String) 이미지 경로
+                        - alt : (String) 이미지 대체 텍스트
+                    - selfIntroduction : (String) 자기소개
+                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
+                    
+                    [처리 로직]
+                    - memberUuid 를 기준으로 프로필 정보를 MongoDB 에서 조회합니다.
+                    
+                    [예외 상황]
+                    - NO_EXIST_MEMBER : 해당 UUID 를 가진 프로필 정보가 존재하지 않는 경우
+                    """
+    )
+    @GetMapping("/my-info")
+    public BaseResponseEntity<GetProfileInfoResVo> getMyProfileInfo(@RequestHeader("X-Member-UUID") String memberUuid) {
+        return new BaseResponseEntity<>(
+                ResponseMessage.SUCCESS_GET_MY_PROFILE_INFORMATION.getMessage(),
+                profileService.getProfileInfo(memberUuid).toVo());
+    }
+
+    /**
+     * 9. 회원 프로필 정보 조회
+     *
+     * @param memberUuid
+     * @return
+     */
+    @Operation(
+            summary = "회원 프로필 정보 조회",
+            description = """
+                    다른 회원의 프로필 상세 정보를 조회하는 API 입니다.
+                    
+                    [요청 경로]
+                    - GET /api/v1/profile/{memberUuid}
+                    - PathVariable: memberUuid (String) - 조회할 회원의 UUID
+                    
+                    [응답 필드]
+                    - gradeName : (String) 등급명
+                    - nickname : (String) 회원 닉네임
+                    - profileImage : (객체) 프로필 이미지 정보
+                        - type : (String) 이미지 타입 (jpg, jpeg, png, gif, webp, svg, heic)
+                        - imageUrl : (String) 이미지 경로
+                        - alt : (String) 이미지 대체 텍스트
+                    - selfIntroduction : (String) 자기소개
+                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
+                    
+                    [처리 로직]
+                    - memberUuid 를 기준으로 프로필 정보를 MongoDB 에서 조회합니다.
+                    
+                    [예외 상황]
+                    - NO_EXIST_MEMBER : 해당 UUID 를 가진 프로필 정보가 존재하지 않는 경우
+                    """
+    )
+    @GetMapping("/member/{memberUuid}")
+    public BaseResponseEntity<GetProfileInfoResVo> getMemberProfileInfo(
+            @PathVariable String memberUuid
+    ) {
+        return new BaseResponseEntity<>(
+                ResponseMessage.SUCCESS_GET_MEMBER_PROFILE_INFORMATION.getMessage(),
+                profileService.getProfileInfo(memberUuid).toVo());
     }
 }

@@ -6,6 +6,7 @@ import com.unionclass.profileservice.domain.grade.application.GradeService;
 import com.unionclass.profileservice.domain.grade.entity.Grade;
 import com.unionclass.profileservice.domain.profile.dto.in.*;
 import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
+import com.unionclass.profileservice.domain.profile.dto.out.GetProfileInfoResDto;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.infrastructure.ProfileRepository;
@@ -171,5 +172,17 @@ public class ProfileServiceImpl implements ProfileService {
             log.warn("프로필 이미지 변경 실패 - Member UUID: {}", updateProfileImageReqDto.getMemberUuid());
             throw new BaseException(ErrorCode.FAILED_TO_UPDATE_PROFILE_IMAGE);
         }
+    }
+
+    /**
+     * 프로필 정보 조회
+     *
+     * @param memberUuid
+     * @return
+     */
+    @Override
+    public GetProfileInfoResDto getProfileInfo(String memberUuid) {
+        return GetProfileInfoResDto.from(profileRepository.findByMemberUuid(memberUuid)
+                .orElseThrow(() -> new BaseException(ErrorCode.NO_EXIST_MEMBER)));
     }
 }

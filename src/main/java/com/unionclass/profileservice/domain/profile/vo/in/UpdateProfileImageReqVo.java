@@ -3,13 +3,10 @@ package com.unionclass.profileservice.domain.profile.vo.in;
 import com.unionclass.profileservice.domain.profile.enums.ImageType;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
-public class CreateProfileReqVo {
+public class UpdateProfileImageReqVo {
 
-    private String selfIntroduction;
-    private ImageType imageType;
+    private ImageType profileImageType;
     private String profileImageUrl;
-    private List<Long> categoryListIds;
+    private String alt;
 }

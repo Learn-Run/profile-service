@@ -1,8 +1,10 @@
 package com.unionclass.profileservice.domain.profile.dto.in;
 
+import com.unionclass.profileservice.domain.grade.entity.Grade;
+import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.enums.ImageType;
 import com.unionclass.profileservice.domain.profile.vo.in.CreateProfileReqVo;
-import jakarta.validation.Valid;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,16 +17,16 @@ public class CreateProfileReqDto {
 
     private String memberUuid;
     private String selfIntroduction;
-    private String imageUrl;
-    private String alt;
+    private ImageType imageType;
+    private String profileImageUrl;
     private List<Long> categoryListIds;
 
     @Builder
-    public CreateProfileReqDto(String memberUuid, String selfIntroduction, String imageUrl, String alt, List<Long> categoryListIds) {
+    public CreateProfileReqDto(String memberUuid, String selfIntroduction, ImageType imageType, String profileImageUrl, List<Long> categoryListIds) {
         this.memberUuid = memberUuid;
         this.selfIntroduction = selfIntroduction;
-        this.imageUrl = imageUrl;
-        this.alt = alt;
+        this.imageType = imageType;
+        this.profileImageUrl = profileImageUrl;
         this.categoryListIds = categoryListIds;
     }
 
@@ -32,20 +34,21 @@ public class CreateProfileReqDto {
         return CreateProfileReqDto.builder()
                 .memberUuid(memberUuid)
                 .selfIntroduction(createProfileReqVo.getSelfIntroduction())
-                .imageUrl(createProfileReqVo.getImageUrl())
-                .alt(createProfileReqVo.getAlt())
+                .imageType(createProfileReqVo.getImageType())
+                .profileImageUrl(createProfileReqVo.getProfileImageUrl())
                 .categoryListIds(createProfileReqVo.getCategoryListIds())
                 .build();
     }
 
-    public Profile toEntity(Profile profile) {
+    public Profile toEntity(Profile profile, Image image, Grade grade) {
         return Profile.builder()
                 .id(profile.getId())
                 .memberUuid(memberUuid)
                 .nickname(profile.getNickname())
+                .image(image)
                 .selfIntroduction(selfIntroduction)
-                .alt(alt)
                 .categoryListIds(categoryListIds)
+                .grade(grade)
                 .build();
     }
 }

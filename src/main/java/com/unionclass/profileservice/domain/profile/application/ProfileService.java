@@ -2,7 +2,7 @@ package com.unionclass.profileservice.domain.profile.application;
 
 import com.unionclass.profileservice.domain.profile.dto.in.*;
 import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
-import com.unionclass.profileservice.domain.profile.vo.out.GetAuthorInfoVo;
+import com.unionclass.profileservice.domain.profile.dto.out.GetProfileInfoResDto;
 
 public interface ProfileService {
 
@@ -11,5 +11,7 @@ public interface ProfileService {
     void changeNickname(ChangeNicknameReqDto changeNicknameReqDto);
     GetAuthorInfoDto getAuthorInfo(String memberUuid);
     void createProfile(CreateProfileReqDto createProfileReqDto);
-    void updateProfile(UpdateProfileReqDto updateProfileReqDto);
+    void updateProfileInfo(UpdateProfileInfoReqDto updateProfileInfoReqDto);
+    void updateProfileImage(UpdateProfileImageReqDto updateProfileImageReqDto);
+    GetProfileInfoResDto getProfileInfo(String memberUuid);
 }

@@ -12,7 +12,14 @@ public enum ResponseMessage {
     SUCCESS_CHANGE_NICKNAME("닉네임 변경에 성공하였습니다."),
     SUCCESS_GET_AUTHOR_INFORMATION("작성자 프로필 조회에 성공하였습니다."),
     SUCCESS_CREATE_PROFILE("프로필 생성에 성공하였습니다."),
-    SUCCESS_UPDATE_PROFILE("프로필 변경에 성공하였습니다.");
+    SUCCESS_UPDATE_PROFILE_INFORMATION("프로필 정보 변경에 성공하였습니다."),
+    SUCCESS_CREATE_GRADE("등급 생성에 성공하였습니다."),
+    SUCCESS_GET_ALL_GRADES("등급 전체 조회에 성공하였습니다."),
+    SUCCESS_GET_GRADE_NAME("등급명 조회에 성공하였습니다."),
+    SUCCESS_UPDATE_PROFILE_IMAGE("프로필 이미지 변경에 성공하였습니다."),
+    SUCCESS_GET_MY_PROFILE_INFORMATION("내 프로필 정보 조회에 성공하였습니다."),
+    SUCCESS_GET_MEMBER_PROFILE_INFORMATION("회원 프로필 정보 조회에 성공하였습니다."),
+    ;
 
     private final String message;
 }

@@ -13,6 +13,7 @@ public enum ErrorCode {
      */
     FAILED_TO_UPLOAD_FILE(HttpStatus.INTERNAL_SERVER_ERROR, false, 500, "파일 업로드에 실패하였습니다."),
     FAILED_TO_DELETE_FILE(HttpStatus.INTERNAL_SERVER_ERROR, false, 501, "파일 삭제에 실패하였습니다."),
+    INVALID_IMAGE_TYPE(HttpStatus.BAD_REQUEST, false, 501, "지원하지 않는 Image 타입입니다."),
 
     /**
      * 600 ~ 699 : gateway service error
@@ -72,7 +73,6 @@ public enum ErrorCode {
     FAILED_TO_UPDATE_PROFILE_INFORMATION(HttpStatus.INTERNAL_SERVER_ERROR, false, 1202, "프로필 정보 변경에 실패하였습니다."),
     FAILED_TO_CREATE_GRADE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1203, "등급 생성에 실패하였습니다."),
     FAILED_TO_FIND_GRADE(HttpStatus.BAD_REQUEST, false, 1204, "등급 조회에 실패하였습니다."),
-    INVALID_IMAGE_TYPE(HttpStatus.BAD_REQUEST, false, 1205, "지원하지 않는 Image 타입입니다."),
     FAILED_TO_UPDATE_PROFILE_IMAGE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1206, "프로필 이미지 변경에 실패하였습니다.");
 
     /**

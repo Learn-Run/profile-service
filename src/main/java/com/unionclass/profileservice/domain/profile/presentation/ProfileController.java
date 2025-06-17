@@ -184,7 +184,7 @@ public class ProfileController {
                     - selfIntroduction : (String) 자기소개
                     - imageType : (String) 이미지 타입 (jpg, jpeg, png, gif, webp, svg, heic)
                     - profileImageUrl : (String) 프로필 이미지 URL
-                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
+                    - categoryList : (List<Category>) 관심 카테고리 리스트
         
                     [처리 로직]
                     - 회원의 UUID 로 기존 프로필을 조회합니다.
@@ -221,7 +221,7 @@ public class ProfileController {
             
                     [요청 바디]
                     - selfIntroduction : (String) 자기소개
-                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
+                    - categoryList : (List<Category>) 관심 카테고리 리스트
             
                     [처리 로직]
                     - memberUuid 로 기존 프로필을 조회
@@ -299,7 +299,7 @@ public class ProfileController {
                         - imageUrl : (String) 이미지 경로
                         - alt : (String) 이미지 대체 텍스트
                     - selfIntroduction : (String) 자기소개
-                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
+                    - categoryList : (List<Category>) 관심 카테고리 리스트
                     
                     [처리 로직]
                     - memberUuid 를 기준으로 프로필 정보를 MongoDB 에서 조회합니다.
@@ -338,7 +338,7 @@ public class ProfileController {
                         - imageUrl : (String) 이미지 경로
                         - alt : (String) 이미지 대체 텍스트
                     - selfIntroduction : (String) 자기소개
-                    - categoryListIds : (List<Long>) 관심 카테고리 ID 리스트
+                    - categoryList : (List<Category>) 관심 카테고리 리스트
                     
                     [처리 로직]
                     - memberUuid 를 기준으로 프로필 정보를 MongoDB 에서 조회합니다.

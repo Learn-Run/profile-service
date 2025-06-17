@@ -1,6 +1,7 @@
 package com.unionclass.profileservice.domain.profile.dto.in;
 
 import com.unionclass.profileservice.domain.grade.entity.Grade;
+import com.unionclass.profileservice.domain.profile.entity.Category;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.enums.ImageType;
@@ -19,15 +20,15 @@ public class CreateProfileReqDto {
     private String selfIntroduction;
     private ImageType imageType;
     private String profileImageUrl;
-    private List<Long> categoryListIds;
+    private List<Category> categoryList;
 
     @Builder
-    public CreateProfileReqDto(String memberUuid, String selfIntroduction, ImageType imageType, String profileImageUrl, List<Long> categoryListIds) {
+    public CreateProfileReqDto(String memberUuid, String selfIntroduction, ImageType imageType, String profileImageUrl, List<Category> categoryList) {
         this.memberUuid = memberUuid;
         this.selfIntroduction = selfIntroduction;
         this.imageType = imageType;
         this.profileImageUrl = profileImageUrl;
-        this.categoryListIds = categoryListIds;
+        this.categoryList = categoryList;
     }
 
     public static CreateProfileReqDto of(String memberUuid, CreateProfileReqVo createProfileReqVo) {
@@ -36,7 +37,7 @@ public class CreateProfileReqDto {
                 .selfIntroduction(createProfileReqVo.getSelfIntroduction())
                 .imageType(createProfileReqVo.getImageType())
                 .profileImageUrl(createProfileReqVo.getProfileImageUrl())
-                .categoryListIds(createProfileReqVo.getCategoryListIds())
+                .categoryList(createProfileReqVo.getCategoryList())
                 .build();
     }
 
@@ -47,7 +48,7 @@ public class CreateProfileReqDto {
                 .nickname(profile.getNickname())
                 .image(image)
                 .selfIntroduction(selfIntroduction)
-                .categoryListIds(categoryListIds)
+                .categoryList(categoryList)
                 .grade(grade)
                 .build();
     }

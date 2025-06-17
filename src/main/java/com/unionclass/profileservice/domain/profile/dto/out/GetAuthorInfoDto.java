@@ -13,12 +13,14 @@ public class GetAuthorInfoDto {
 
     private String memberUuid;
     private String nickname;
+    private String gradeName;
     private Image profileImage;
 
     @Builder
-    public GetAuthorInfoDto(String memberUuid, String nickname, Image profileImage) {
+    public GetAuthorInfoDto(String memberUuid, String nickname, String gradeName, Image profileImage) {
         this.memberUuid = memberUuid;
         this.nickname = nickname;
+        this.gradeName = gradeName;
         this.profileImage = profileImage;
     }
 
@@ -26,6 +28,7 @@ public class GetAuthorInfoDto {
         return GetAuthorInfoDto.builder()
                 .memberUuid(profile.getMemberUuid())
                 .nickname(profile.getNickname())
+                .gradeName(profile.getGrade().getName())
                 .profileImage(profile.getImage())
                 .build();
     }
@@ -34,6 +37,7 @@ public class GetAuthorInfoDto {
         return GetAuthorInfoVo.builder()
                 .memberUuid(memberUuid)
                 .nickname(nickname)
+                .gradeName(gradeName)
                 .profileImage(profileImage)
                 .build();
     }

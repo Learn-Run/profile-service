@@ -1,5 +1,6 @@
 package com.unionclass.profileservice.domain.profile.dto.out;
 
+import com.unionclass.profileservice.domain.profile.entity.Category;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.vo.out.GetProfileInfoResVo;
@@ -17,11 +18,11 @@ public class GetProfileInfoResDto {
     private String nickname;
     private Image profileImage;
     private String selfIntroduction;
-    private List<Long> categoryListIds;
+    private List<Category> categoryListIds;
 
     @Builder
     public GetProfileInfoResDto(
-            String gradeName, String nickname, Image profileImage, String selfIntroduction, List<Long> categoryListIds
+            String gradeName, String nickname, Image profileImage, String selfIntroduction, List<Category> categoryListIds
     ) {
         this.gradeName = gradeName;
         this.nickname = nickname;
@@ -36,7 +37,7 @@ public class GetProfileInfoResDto {
                 .nickname(profile.getNickname())
                 .profileImage(profile.getImage())
                 .selfIntroduction(profile.getSelfIntroduction())
-                .categoryListIds(profile.getCategoryListIds())
+                .categoryListIds(profile.getCategoryList())
                 .build();
     }
 
@@ -46,7 +47,7 @@ public class GetProfileInfoResDto {
                 .nickname(nickname)
                 .profileImage(profileImage)
                 .selfIntroduction(selfIntroduction)
-                .categoryListIds(categoryListIds)
+                .categoryList(categoryListIds)
                 .build();
     }
 }

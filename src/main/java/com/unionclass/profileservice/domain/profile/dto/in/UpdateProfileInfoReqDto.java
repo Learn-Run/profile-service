@@ -1,5 +1,6 @@
 package com.unionclass.profileservice.domain.profile.dto.in;
 
+import com.unionclass.profileservice.domain.profile.entity.Category;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
 import com.unionclass.profileservice.domain.profile.enums.ImageType;
 import com.unionclass.profileservice.domain.profile.vo.in.UpdateProfileInfoReqVo;
@@ -15,20 +16,20 @@ public class UpdateProfileInfoReqDto {
 
     private String memberUuid;
     private String selfIntroduction;
-    private List<Long> categoryListIds;
+    private List<Category> categoryList;
 
     @Builder
-    public UpdateProfileInfoReqDto(String memberUuid, String selfIntroduction, List<Long> categoryListIds) {
+    public UpdateProfileInfoReqDto(String memberUuid, String selfIntroduction, List<Category> categoryList) {
         this.memberUuid = memberUuid;
         this.selfIntroduction = selfIntroduction;
-        this.categoryListIds = categoryListIds;
+        this.categoryList = categoryList;
     }
 
     public static UpdateProfileInfoReqDto of(String memberUuid, UpdateProfileInfoReqVo updateProfileReqVo) {
         return UpdateProfileInfoReqDto.builder()
                 .memberUuid(memberUuid)
                 .selfIntroduction(updateProfileReqVo.getSelfIntroduction())
-                .categoryListIds(updateProfileReqVo.getCategoryListIds())
+                .categoryList(updateProfileReqVo.getCategoryList())
                 .build();
     }
 
@@ -39,7 +40,7 @@ public class UpdateProfileInfoReqDto {
                 .nickname(profile.getNickname())
                 .image(profile.getImage())
                 .selfIntroduction(selfIntroduction == null ? profile.getSelfIntroduction() : selfIntroduction)
-                .categoryListIds(categoryListIds == null ? profile.getCategoryListIds() : categoryListIds)
+                .categoryList(categoryList == null ? profile.getCategoryList() : categoryList)
                 .grade(profile.getGrade())
                 .build();
     }

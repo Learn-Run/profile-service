@@ -48,7 +48,7 @@ public class UpdateProfileImageReqDto {
                 .nickname(profile.getNickname())
                 .image(image)
                 .selfIntroduction(profile.getSelfIntroduction())
-                .categoryListIds(profile.getCategoryListIds())
+                .categoryList(profile.getCategoryList())
                 .grade(profile.getGrade())
                 .build();
     }

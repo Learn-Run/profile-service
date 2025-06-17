@@ -11,12 +11,14 @@ public class GetAuthorInfoVo {
 
     private String memberUuid;
     private String nickname;
+    private String gradeName;
     private Image profileImage;
 
     @Builder
-    public GetAuthorInfoVo(String memberUuid, String nickname, Image profileImage) {
+    public GetAuthorInfoVo(String memberUuid, String nickname, String gradeName, Image profileImage) {
         this.memberUuid = memberUuid;
         this.nickname = nickname;
+        this.gradeName = gradeName;
         this.profileImage = profileImage;
     }
 }

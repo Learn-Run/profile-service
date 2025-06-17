@@ -24,21 +24,21 @@ public class Profile extends BaseDocument {
     private Image image;
     private String selfIntroduction;
 
-    private List<Long> categoryListIds;
+    private List<Category> categoryList;
 
     private Grade grade;
 
     @Builder
     public Profile(
             String id, String memberUuid, String nickname, Image image,
-            String selfIntroduction, List<Long> categoryListIds, Grade grade
+            String selfIntroduction, List<Category> categoryList, Grade grade
     ) {
         this.id = id;
         this.memberUuid = memberUuid;
         this.nickname = nickname;
         this.image = image;
         this.selfIntroduction = selfIntroduction;
-        this.categoryListIds = categoryListIds;
+        this.categoryList = categoryList;
         this.grade = grade;
     }
 

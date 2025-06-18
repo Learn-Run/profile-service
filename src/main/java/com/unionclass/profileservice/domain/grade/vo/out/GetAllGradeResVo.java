@@ -10,10 +10,12 @@ public class GetAllGradeResVo {
 
     private Long gradeId;
     private String gradeName;
+    private String gradeColor;
 
     @Builder
-    public GetAllGradeResVo(Long gradeId, String gradeName) {
+    public GetAllGradeResVo(Long gradeId, String gradeName, String gradeColor) {
         this.gradeId = gradeId;
         this.gradeName = gradeName;
+        this.gradeColor = gradeColor;
     }
 }

@@ -12,17 +12,20 @@ public class GetAllGradeResDto {
 
     private Long gradeId;
     private String gradeName;
+    private String gradeColor;
 
     @Builder
-    public GetAllGradeResDto(Long gradeId, String gradeName) {
+    public GetAllGradeResDto(Long gradeId, String gradeName, String gradeColor) {
         this.gradeId = gradeId;
         this.gradeName = gradeName;
+        this.gradeColor = gradeColor;
     }
 
     public static GetAllGradeResDto from(Grade grade) {
         return GetAllGradeResDto.builder()
                 .gradeId(grade.getId())
                 .gradeName(grade.getName())
+                .gradeColor(grade.getColor())
                 .build();
     }
 
@@ -30,6 +33,7 @@ public class GetAllGradeResDto {
         return GetAllGradeResVo.builder()
                 .gradeId(gradeId)
                 .gradeName(gradeName)
+                .gradeColor(gradeColor)
                 .build();
     }
 }

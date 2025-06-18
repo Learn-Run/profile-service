@@ -26,6 +26,10 @@ public class Grade extends BaseEntity {
     @Column(nullable = false, unique = true)
     private int level;
 
+    @Comment("등급 컬러")
+    @Column(nullable = false, length = 20)
+    private String color;
+
     @Comment("등급 조건 설명")
     @Column(nullable = false, length = 255)
     private String requirement;
@@ -39,10 +43,14 @@ public class Grade extends BaseEntity {
     private BigDecimal commissionDiscountRate;
 
     @Builder
-    public Grade(Long id, String name, int level, String requirement, boolean defaultStatus, BigDecimal commissionDiscountRate) {
+    public Grade(
+            Long id, String name, int level, String color,
+            String requirement, boolean defaultStatus, BigDecimal commissionDiscountRate
+    ) {
         this.id = id;
         this.name = name;
         this.level = level;
+        this.color = color;
         this.requirement = requirement;
         this.defaultStatus = defaultStatus;
         this.commissionDiscountRate = commissionDiscountRate;

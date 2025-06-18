@@ -14,14 +14,18 @@ public class CreateGradeReqDto {
 
     private String gradeName;
     private int gradeLevel;
+    private String gradeColor;
     private String gradeRequirement;
     private boolean defaultStatus;
     private BigDecimal commissionDiscountRate;
 
     @Builder
-    public CreateGradeReqDto(String gradeName, int gradeLevel, String gradeRequirement, boolean defaultStatus, BigDecimal commissionDiscountRate) {
+    public CreateGradeReqDto(
+            String gradeName, int gradeLevel, String gradeColor,
+            String gradeRequirement, boolean defaultStatus, BigDecimal commissionDiscountRate) {
         this.gradeName = gradeName;
         this.gradeLevel = gradeLevel;
+        this.gradeColor = gradeColor;
         this.gradeRequirement = gradeRequirement;
         this.defaultStatus = defaultStatus;
         this.commissionDiscountRate = commissionDiscountRate;
@@ -31,6 +35,7 @@ public class CreateGradeReqDto {
         return CreateGradeReqDto.builder()
                 .gradeName(createGradeReqVo.getGradeName())
                 .gradeLevel(createGradeReqVo.getGradeLevel())
+                .gradeColor(createGradeReqVo.getGradeColor())
                 .gradeRequirement(createGradeReqVo.getGradeRequirement())
                 .defaultStatus(createGradeReqVo.isDefaultStatus())
                 .commissionDiscountRate(createGradeReqVo.getCommissionDiscountRate())
@@ -41,6 +46,7 @@ public class CreateGradeReqDto {
         return Grade.builder()
                 .name(gradeName)
                 .level(gradeLevel)
+                .color(gradeColor)
                 .requirement(gradeRequirement)
                 .defaultStatus(defaultStatus)
                 .commissionDiscountRate(commissionDiscountRate)

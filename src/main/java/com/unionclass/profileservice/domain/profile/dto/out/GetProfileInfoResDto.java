@@ -3,6 +3,7 @@ package com.unionclass.profileservice.domain.profile.dto.out;
 import com.unionclass.profileservice.domain.profile.entity.Category;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.entity.ProfileGrade;
 import com.unionclass.profileservice.domain.profile.vo.out.GetProfileInfoResVo;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class GetProfileInfoResDto {
 
-    private String gradeName;
+    private ProfileGrade grade;
     private String nickname;
     private Image profileImage;
     private String selfIntroduction;
@@ -22,9 +23,9 @@ public class GetProfileInfoResDto {
 
     @Builder
     public GetProfileInfoResDto(
-            String gradeName, String nickname, Image profileImage, String selfIntroduction, List<Category> categoryListIds
+            ProfileGrade grade, String nickname, Image profileImage, String selfIntroduction, List<Category> categoryListIds
     ) {
-        this.gradeName = gradeName;
+        this.grade = grade;
         this.nickname = nickname;
         this.profileImage = profileImage;
         this.selfIntroduction = selfIntroduction;
@@ -33,7 +34,7 @@ public class GetProfileInfoResDto {
 
     public static GetProfileInfoResDto from(Profile profile) {
         return GetProfileInfoResDto.builder()
-                .gradeName(profile.getGrade().getName())
+                .grade(profile.getGrade())
                 .nickname(profile.getNickname())
                 .profileImage(profile.getImage())
                 .selfIntroduction(profile.getSelfIntroduction())
@@ -43,7 +44,7 @@ public class GetProfileInfoResDto {
 
     public GetProfileInfoResVo toVo() {
         return GetProfileInfoResVo.builder()
-                .gradeName(gradeName)
+                .grade(grade)
                 .nickname(nickname)
                 .profileImage(profileImage)
                 .selfIntroduction(selfIntroduction)

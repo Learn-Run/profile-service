@@ -1,7 +1,9 @@
 package com.unionclass.profileservice.domain.profile.dto.out;
 
+import com.unionclass.profileservice.domain.grade.entity.Grade;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.entity.ProfileGrade;
 import com.unionclass.profileservice.domain.profile.vo.out.GetAuthorInfoVo;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,14 +15,14 @@ public class GetAuthorInfoDto {
 
     private String memberUuid;
     private String nickname;
-    private String gradeName;
+    private ProfileGrade grade;
     private Image profileImage;
 
     @Builder
-    public GetAuthorInfoDto(String memberUuid, String nickname, String gradeName, Image profileImage) {
+    public GetAuthorInfoDto(String memberUuid, String nickname, ProfileGrade grade, Image profileImage) {
         this.memberUuid = memberUuid;
         this.nickname = nickname;
-        this.gradeName = gradeName;
+        this.grade = grade;
         this.profileImage = profileImage;
     }
 
@@ -28,7 +30,7 @@ public class GetAuthorInfoDto {
         return GetAuthorInfoDto.builder()
                 .memberUuid(profile.getMemberUuid())
                 .nickname(profile.getNickname())
-                .gradeName(profile.getGrade().getName())
+                .grade(profile.getGrade())
                 .profileImage(profile.getImage())
                 .build();
     }
@@ -37,7 +39,7 @@ public class GetAuthorInfoDto {
         return GetAuthorInfoVo.builder()
                 .memberUuid(memberUuid)
                 .nickname(nickname)
-                .gradeName(gradeName)
+                .grade(grade)
                 .profileImage(profileImage)
                 .build();
     }

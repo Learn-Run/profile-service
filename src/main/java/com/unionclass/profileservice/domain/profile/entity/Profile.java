@@ -26,12 +26,12 @@ public class Profile extends BaseDocument {
 
     private List<Category> categoryList;
 
-    private Grade grade;
+    private ProfileGrade grade;
 
     @Builder
     public Profile(
             String id, String memberUuid, String nickname, Image image,
-            String selfIntroduction, List<Category> categoryList, Grade grade
+            String selfIntroduction, List<Category> categoryList, ProfileGrade grade
     ) {
         this.id = id;
         this.memberUuid = memberUuid;

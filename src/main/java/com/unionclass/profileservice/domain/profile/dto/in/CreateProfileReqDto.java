@@ -4,6 +4,7 @@ import com.unionclass.profileservice.domain.grade.entity.Grade;
 import com.unionclass.profileservice.domain.profile.entity.Category;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.entity.ProfileGrade;
 import com.unionclass.profileservice.domain.profile.enums.ImageType;
 import com.unionclass.profileservice.domain.profile.vo.in.CreateProfileReqVo;
 import lombok.Builder;
@@ -41,7 +42,7 @@ public class CreateProfileReqDto {
                 .build();
     }
 
-    public Profile toEntity(Profile profile, Image image, Grade grade) {
+    public Profile toEntity(Profile profile, Image image, ProfileGrade grade) {
         return Profile.builder()
                 .id(profile.getId())
                 .memberUuid(memberUuid)

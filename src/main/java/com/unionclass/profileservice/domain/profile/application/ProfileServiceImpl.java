@@ -9,6 +9,7 @@ import com.unionclass.profileservice.domain.profile.dto.out.GetAuthorInfoDto;
 import com.unionclass.profileservice.domain.profile.dto.out.GetProfileInfoResDto;
 import com.unionclass.profileservice.domain.profile.entity.Image;
 import com.unionclass.profileservice.domain.profile.entity.Profile;
+import com.unionclass.profileservice.domain.profile.entity.ProfileGrade;
 import com.unionclass.profileservice.domain.profile.infrastructure.ProfileRepository;
 import com.unionclass.profileservice.domain.profile.util.ImageAltTextTemplateProvider;
 import lombok.RequiredArgsConstructor;
@@ -122,12 +123,7 @@ public class ProfileServiceImpl implements ProfileService {
                             .imageUrl(createProfileReqDto.getProfileImageUrl())
                             .alt(imageAltTextTemplateProvider.getProfileImageAltTextTemplate(profile.getNickname()))
                             .build(),
-                    Grade.builder()
-                            .id(gradeService.getDefaultGradeInfo().getId())
-                            .name(gradeService.getDefaultGradeInfo().getName())
-                            .color(gradeService.getDefaultGradeInfo().getColor())
-                            .build()));
-
+                    ProfileGrade.from(gradeService.getDefaultGradeInfo())));
             log.info("프로필 생성 완료 - Member UUID: {}", createProfileReqDto.getMemberUuid());
         } catch (Exception e) {
             log.warn("프로필 생성 실패 - Member UUID: {}", createProfileReqDto.getMemberUuid());

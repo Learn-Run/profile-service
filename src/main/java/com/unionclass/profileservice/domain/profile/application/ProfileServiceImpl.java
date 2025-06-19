@@ -125,6 +125,7 @@ public class ProfileServiceImpl implements ProfileService {
                     Grade.builder()
                             .id(gradeService.getDefaultGradeInfo().getId())
                             .name(gradeService.getDefaultGradeInfo().getName())
+                            .color(gradeService.getDefaultGradeInfo().getColor())
                             .build()));
 
             log.info("프로필 생성 완료 - Member UUID: {}", createProfileReqDto.getMemberUuid());

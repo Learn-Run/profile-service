@@ -73,7 +73,9 @@ public enum ErrorCode {
     FAILED_TO_UPDATE_PROFILE_INFORMATION(HttpStatus.INTERNAL_SERVER_ERROR, false, 1202, "프로필 정보 변경에 실패하였습니다."),
     FAILED_TO_CREATE_GRADE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1203, "등급 생성에 실패하였습니다."),
     FAILED_TO_FIND_GRADE(HttpStatus.BAD_REQUEST, false, 1204, "등급 조회에 실패하였습니다."),
-    FAILED_TO_UPDATE_PROFILE_IMAGE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1206, "프로필 이미지 변경에 실패하였습니다.");
+    FAILED_TO_UPDATE_PROFILE_IMAGE(HttpStatus.INTERNAL_SERVER_ERROR, false, 1206, "프로필 이미지 변경에 실패하였습니다."),
+    FAILED_TO_UPDATE_GRADE_INFORMATION(HttpStatus.INTERNAL_SERVER_ERROR, false, 1207, "등급 정보 변경에 실패하였습니다."),
+    ;
 
     /**
      * 2000 : post service error

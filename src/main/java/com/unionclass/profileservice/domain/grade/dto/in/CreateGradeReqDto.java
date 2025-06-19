@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class CreateGradeReqDto {
 
     private String gradeName;
-    private int gradeLevel;
+    private Integer gradeLevel;
     private String gradeColor;
     private String gradeRequirement;
     private boolean defaultStatus;
@@ -21,7 +21,7 @@ public class CreateGradeReqDto {
 
     @Builder
     public CreateGradeReqDto(
-            String gradeName, int gradeLevel, String gradeColor,
+            String gradeName, Integer gradeLevel, String gradeColor,
             String gradeRequirement, boolean defaultStatus, BigDecimal commissionDiscountRate) {
         this.gradeName = gradeName;
         this.gradeLevel = gradeLevel;

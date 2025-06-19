@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Getter
-public class CreateGradeReqVo {
+public class UpdateGradeInfoReqVo {
 
     private String gradeName;
     private Integer gradeLevel;

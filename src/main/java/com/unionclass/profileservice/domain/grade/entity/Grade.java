@@ -24,14 +24,14 @@ public class Grade extends BaseEntity {
 
     @Comment("레벨")
     @Column(nullable = false, unique = true)
-    private int level;
+    private Integer level;
 
     @Comment("등급 컬러")
     @Column(nullable = false, length = 20)
     private String color;
 
     @Comment("등급 조건 설명")
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String requirement;
 
     @Comment("기본 등급 여부")
@@ -44,7 +44,7 @@ public class Grade extends BaseEntity {
 
     @Builder
     public Grade(
-            Long id, String name, int level, String color,
+            Long id, String name, Integer level, String color,
             String requirement, boolean defaultStatus, BigDecimal commissionDiscountRate
     ) {
         this.id = id;

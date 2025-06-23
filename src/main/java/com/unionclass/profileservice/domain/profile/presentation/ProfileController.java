@@ -331,6 +331,7 @@ public class ProfileController {
                     - PathVariable: memberUuid (String) - 조회할 회원의 UUID
                     
                     [응답 필드]
+                    - memberUuid : (String) 회원 UUID
                     - gradeName : (String) 등급명
                     - nickname : (String) 회원 닉네임
                     - profileImage : (객체) 프로필 이미지 정보

@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class GetProfileInfoResVo {
 
+    private String memberUuid;
     private ProfileGrade grade;
     private String nickname;
     private Image profileImage;
@@ -20,7 +21,11 @@ public class GetProfileInfoResVo {
     private List<Category> categoryList;
 
     @Builder
-    public GetProfileInfoResVo(ProfileGrade grade, String nickname, Image profileImage, String selfIntroduction, List<Category> categoryList) {
+    public GetProfileInfoResVo(
+            String memberUuid, ProfileGrade grade, String nickname,
+            Image profileImage, String selfIntroduction, List<Category> categoryList
+    ) {
+        this.memberUuid = memberUuid;
         this.grade = grade;
         this.nickname = nickname;
         this.profileImage = profileImage;

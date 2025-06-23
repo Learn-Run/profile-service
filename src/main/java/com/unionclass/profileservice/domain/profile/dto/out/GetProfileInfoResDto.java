@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class GetProfileInfoResDto {
 
+    private String memberUuid;
     private ProfileGrade grade;
     private String nickname;
     private Image profileImage;
@@ -23,8 +24,10 @@ public class GetProfileInfoResDto {
 
     @Builder
     public GetProfileInfoResDto(
-            ProfileGrade grade, String nickname, Image profileImage, String selfIntroduction, List<Category> categoryListIds
+            String memberUuid, ProfileGrade grade, String nickname,
+            Image profileImage, String selfIntroduction, List<Category> categoryListIds
     ) {
+        this.memberUuid = memberUuid;
         this.grade = grade;
         this.nickname = nickname;
         this.profileImage = profileImage;
@@ -34,6 +37,7 @@ public class GetProfileInfoResDto {
 
     public static GetProfileInfoResDto from(Profile profile) {
         return GetProfileInfoResDto.builder()
+                .memberUuid(profile.getMemberUuid())
                 .grade(profile.getGrade())
                 .nickname(profile.getNickname())
                 .profileImage(profile.getImage())
@@ -44,6 +48,7 @@ public class GetProfileInfoResDto {
 
     public GetProfileInfoResVo toVo() {
         return GetProfileInfoResVo.builder()
+                .memberUuid(memberUuid)
                 .grade(grade)
                 .nickname(nickname)
                 .profileImage(profileImage)

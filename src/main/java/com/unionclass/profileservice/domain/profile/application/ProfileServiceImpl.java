@@ -2,6 +2,7 @@ package com.unionclass.profileservice.domain.profile.application;
 
 import com.unionclass.profileservice.common.exception.BaseException;
 import com.unionclass.profileservice.common.exception.ErrorCode;
+import com.unionclass.profileservice.common.kafka.event.MemberCreatedEvent;
 import com.unionclass.profileservice.domain.grade.application.GradeService;
 import com.unionclass.profileservice.domain.grade.entity.Grade;
 import com.unionclass.profileservice.domain.profile.dto.in.*;
@@ -57,6 +58,25 @@ public class ProfileServiceImpl implements ProfileService {
                     registerNicknameReqDto.getMemberUuid(),
                     registerNicknameReqDto.getNickname());
             throw new BaseException(ErrorCode.FAILED_TO_REGISTER_NICKNAME);
+        }
+    }
+
+    @Transactional
+    @Override
+    public void initializeProfile(MemberCreatedEvent event) {
+
+        try {
+
+            profileRepository.save(event.toEntity());
+
+            log.info("프로필 초기화 성공 - memberUuid: {}, nickname: {}", event.getMemberUuid(), event.getNickname());
+
+        } catch (Exception e) {
+
+            log.warn("프로필 초기화 실패 - memberUuid: {}, nickname: {}, message: {}",
+                    event.getMemberUuid(), event.getNickname(), e.getMessage(), e);
+
+            throw new BaseException(ErrorCode.FAILED_TO_INITIALIZE_PROFILE);
         }
     }
 

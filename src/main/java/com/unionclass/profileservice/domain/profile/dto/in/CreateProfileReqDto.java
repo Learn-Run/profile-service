@@ -42,7 +42,7 @@ public class CreateProfileReqDto {
                 .build();
     }
 
-    public Profile toEntity(Profile profile, Image image, ProfileGrade grade) {
+    public Profile toEntity(Profile profile, Image image) {
         return Profile.builder()
                 .id(profile.getId())
                 .memberUuid(memberUuid)
@@ -50,7 +50,6 @@ public class CreateProfileReqDto {
                 .image(image)
                 .selfIntroduction(selfIntroduction)
                 .categoryList(categoryList)
-                .grade(grade)
                 .build();
     }
 }

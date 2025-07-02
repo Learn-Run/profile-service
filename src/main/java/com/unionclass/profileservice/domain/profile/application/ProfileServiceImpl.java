@@ -67,7 +67,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         try {
 
-            profileRepository.save(event.toEntity());
+            profileRepository.save(event.toEntity(ProfileGrade.from(gradeService.getDefaultGradeInfo())));
 
             log.info("프로필 초기화 성공 - memberUuid: {}, nickname: {}", event.getMemberUuid(), event.getNickname());
 
@@ -142,8 +142,8 @@ public class ProfileServiceImpl implements ProfileService {
                             .type(createProfileReqDto.getImageType())
                             .imageUrl(createProfileReqDto.getProfileImageUrl())
                             .alt(imageAltTextTemplateProvider.getProfileImageAltTextTemplate(profile.getNickname()))
-                            .build(),
-                    ProfileGrade.from(gradeService.getDefaultGradeInfo())));
+                            .build()
+                    ));
             log.info("프로필 생성 완료 - Member UUID: {}", createProfileReqDto.getMemberUuid());
         } catch (Exception e) {
             log.warn("프로필 생성 실패 - Member UUID: {}", createProfileReqDto.getMemberUuid());
